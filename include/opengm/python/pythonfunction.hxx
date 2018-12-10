@@ -116,7 +116,7 @@ private:
    bool gilEnsure_;
    boost::python::object functionObj_;
    mutable std::vector<LabelType> labelVector_;
-   //mutable boost::python::numeric::array  numpyCoordinates_;
+   //mutable boost::python::numpy::ndarray  numpyCoordinates_;
    mutable  LabelType * coordinateBuffer_;
    std::vector<LabelType> shape_;
    size_t size_;

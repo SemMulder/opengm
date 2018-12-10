@@ -1,4 +1,5 @@
 #include <boost/python.hpp>
+#include <boost/python/numpy.hpp>
 #include <stddef.h>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <opengm/inference/inference.hxx>
@@ -106,7 +107,7 @@ BOOST_PYTHON_MODULE_INIT(_inference) {
 
    Py_Initialize();
    PyEval_InitThreads();
-   boost::python::numeric::array::set_module_and_type("numpy", "ndarray");
+   boost::python::numpy::ndarray::set_module_and_type("numpy", "ndarray");
    
    std::string adderString="adder";
    std::string multiplierString="multiplier";

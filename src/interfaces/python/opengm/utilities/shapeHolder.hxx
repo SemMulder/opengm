@@ -1,6 +1,7 @@
 #ifndef SHAPEHOLDER_HXX
 #define	SHAPEHOLDER_HXX
 #include <boost/python.hpp>
+#include <boost/python/numpy.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <opengm/python/opengmpython.hxx>
 #include <opengm/python/converter.hxx>
@@ -49,7 +50,7 @@ public:
       return opengm::python::iteratorToList(factor_->shapeBegin(),this->size());
    }
 
-   boost::python::numeric::array toNumpy()const {
+   boost::python::numpy::ndarray toNumpy()const {
       return opengm::python::iteratorToNumpy(factor_->shapeBegin(),this->size());
    }
    boost::python::tuple toTuple()const {
@@ -108,7 +109,7 @@ public:
       return opengm::python::iteratorToList(factor_-> variableIndicesBegin(),this->size());
    }
 
-   boost::python::numeric::array toNumpy()const {
+   boost::python::numpy::ndarray toNumpy()const {
       return opengm::python::iteratorToNumpy(factor_->variableIndicesBegin(),this->size());
    }
    boost::python::tuple toTuple()const {
@@ -155,7 +156,7 @@ public:
       return opengm::python::iteratorToList(gm_-> factorsOfVariableBegin(variableIndex_),this->size());
    }
 
-   boost::python::numeric::array toNumpy()const {
+   boost::python::numpy::ndarray toNumpy()const {
       return opengm::python::iteratorToNumpy(gm_->factorsOfVariableBegin(variableIndex_),this->size());
    }
    boost::python::tuple toTuple()const {

@@ -6,7 +6,7 @@
 
 
 #include <boost/python.hpp>
-
+#include <boost/python/numpy.hpp>
 
 #include <stddef.h>
 
@@ -260,7 +260,7 @@ public:
    typedef T value_type;
    typedef value_type reference;
    typedef const value_type* pointer;
-   Python1dNumpyIntegralArrayAccessor(boost::python::numeric::array const * npaPtr = NULL)
+   Python1dNumpyIntegralArrayAccessor(boost::python::numpy::ndarray const * npaPtr = NULL)
       : numpyArrayPtr_(npaPtr) {
       if(numpyArrayPtr_!=NULL){
          const boost::python::tuple &shape = boost::python::extract<boost::python::tuple > ((*numpyArrayPtr_).attr("shape"));
@@ -271,7 +271,7 @@ public:
          size_=static_cast<size_t>(boost::python::extract<int>(shape[0]));
       }
    }
-   Python1dNumpyIntegralArrayAccessor(const boost::python::numeric::array & npa)
+   Python1dNumpyIntegralArrayAccessor(const boost::python::numpy::ndarray & npa)
       : numpyArrayPtr_(&npa) {
       const boost::python::tuple &shape = boost::python::extract<boost::python::tuple > (npa.attr("shape"));
       size_t dimension = boost::python::len(shape);
@@ -332,7 +332,7 @@ public:
          { return numpyArrayPtr_ == other.numpyArrayPtr_; }
 
 private:
-   boost::python::numeric::array const * numpyArrayPtr_;
+   boost::python::numpy::ndarray const * numpyArrayPtr_;
    size_t size_;
 };
 */

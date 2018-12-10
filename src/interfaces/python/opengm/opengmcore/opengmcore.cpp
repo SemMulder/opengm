@@ -3,6 +3,7 @@
 
 
 #include <boost/python.hpp>
+#include <boost/python/numpy.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/python/module.hpp>
 #include <boost/python/def.hpp>
@@ -570,7 +571,7 @@ void dequePushBack(
 BOOST_PYTHON_MODULE_INIT(_opengmcore) {
    Py_Initialize();
    PyEval_InitThreads();
-   boost::python::numeric::array::set_module_and_type("numpy", "ndarray");
+   boost::python::numpy::ndarray::set_module_and_type("numpy", "ndarray");
    boost::python::docstring_options docstringOptions(true,true,false);
 
    // specify that this module is actually a package

@@ -8,6 +8,7 @@
 //#include <Python.h>
 #include <numpy/arrayobject.h>
 
+#include <boost/python/numpy.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 
 
@@ -113,8 +114,8 @@ inline VALUE_TYPE * getCastedPtr(boost::python::object obj){
    return  static_cast< VALUE_TYPE *>(array_data);
 }
 
-inline boost::python::numeric::array objToArray(boost::python::object obj){
-   return boost::python::extract<boost::python::numeric::array > (obj);
+inline boost::python::numpy::ndarray objToArray(boost::python::object obj){
+   return boost::python::extract<boost::python::numpy::ndarray > (obj);
 }
 
 
@@ -195,7 +196,7 @@ inline boost::python::list iteratorToList(ITERATOR iter, size_t size) {
 }
 
 template<class ITERATOR>
-inline boost::python::numeric::array iteratorToNumpy(ITERATOR iter, size_t size) {
+inline boost::python::numpy::ndarray iteratorToNumpy(ITERATOR iter, size_t size) {
    typedef typename std::iterator_traits<ITERATOR>::value_type ValueType;
    boost::python::object obj = get1dArray<ValueType>(size);
    ValueType * castedPtr = getCastedPtr<ValueType>(obj);
@@ -209,11 +210,11 @@ inline PyArray_TYPES getArrayType(NUMERIC_ARRAY arr) {
    return PyArray_TYPES(PyArray_TYPE(arr.ptr()));
 }
 
-inline boost::python::numeric::array extractConstNumericArray
+inline boost::python::numpy::ndarray extractConstNumericArray
 (
    PyObject * obj
 ) {
-   return boost::python::extract<boost::python::numeric::array > (obj);
+   return boost::python::extract<boost::python::numpy::ndarray > (obj);
 }
 
 inline int numpyScalarTypeNumber(PyObject* obj) {
@@ -240,7 +241,7 @@ struct NumpyViewType_from_python_numpyarray {
          //PyErr_SetString(PyExc_ValueError, "expected a PyArrayObject");
          return 0;
       } else {
-         numeric::array numpyArray = extractConstNumericArray(obj_ptr);
+         numpy::ndarray numpyArray = extractConstNumericArray(obj_ptr);
          PyArray_TYPES pyArrayType = getArrayType(numpyArray);
          // check if the type of the numpy array matches the c++ type  
          PyArray_TYPES myEnum = typeEnumFromType<ValueType > ();
@@ -280,7 +281,7 @@ struct NumpyViewType_from_python_numpyarray {
 
       // in-place construct the new NumpyViewType using the character data
       // extraced from the python object
-      //const numeric::array & numpyArray = extractConstNumericArray(obj_ptr);
+      //const numpy::ndarray & numpyArray = extractConstNumericArray(obj_ptr);
       new (storage) NumpyViewType(boost::python::object(boost::python::borrowed(obj_ptr)));
       // Stash the memory chunk pointer for later use by boost.python
       data->convertible = storage;

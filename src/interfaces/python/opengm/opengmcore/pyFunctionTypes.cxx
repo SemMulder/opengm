@@ -1,4 +1,5 @@
 #include <boost/python.hpp>
+#include <boost/python/numpy.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/python/suite/indexing/map_indexing_suite.hpp>
 
@@ -257,8 +258,8 @@ namespace pyfunction{
         for(size_t l=0; l<numberOfLabels; ++l){
 
             std::cout<<"extr. l "<<l<<"\n";
-            boost::python::extract<boost::python::numeric::array> eW(weightIds[l]);
-            boost::python::extract<boost::python::numeric::array> eF(features[l]);
+            boost::python::extract<boost::python::numpy::ndarray> eW(weightIds[l]);
+            boost::python::extract<boost::python::numpy::ndarray> eF(features[l]);
 
             IndexArray wId = eW();
             ValueArray fs = eF();
@@ -461,7 +462,7 @@ namespace pyfuncvec{
 template<class V,class I>
 void export_functiontypes(){
    import_array();
-   boost::python::numeric::array::set_module_and_type("numpy", "ndarray");
+   boost::python::numpy::ndarray::set_module_and_type("numpy", "ndarray");
    typedef V ValueType;
    typedef I IndexType;
    typedef IndexType LabelType;

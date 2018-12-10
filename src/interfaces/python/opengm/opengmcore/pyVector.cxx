@@ -1,4 +1,5 @@
 #include <boost/python.hpp>
+#include <boost/python/numpy.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/python/stl_iterator.hpp>
 #include <stdexcept>
@@ -30,7 +31,7 @@ namespace pyvector{
    }
 
    template<class VECTOR>
-           boost::python::numeric::array asNumpy(const VECTOR & vector) {
+           boost::python::numpy::ndarray asNumpy(const VECTOR & vector) {
       return  opengm::python::iteratorToNumpy(vector.begin(), vector.size());
    }
 
@@ -211,7 +212,7 @@ namespace pyvector{
 
 template<class INDEX>
 void export_vectors() {
-   boost::python::numeric::array::set_module_and_type("numpy", "ndarray");
+   boost::python::numpy::ndarray::set_module_and_type("numpy", "ndarray");
    import_array();
    typedef std::vector<INDEX> IndexTypeStdVector;
    typedef std::vector< IndexTypeStdVector> IndexTypeStdVectorVector;

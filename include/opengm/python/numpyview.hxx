@@ -2,6 +2,7 @@
 #define	NUMPYVIEW_INCL_HXX
 
 #include <boost/python.hpp>
+#include <boost/python/numpy.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <numpy/noprefix.h>
 #ifdef Bool
@@ -35,7 +36,7 @@ public:
 
    }
    NumpyView( boost::python::object  obj):allocFromCpp_(false){
-      boost::python::numeric::array array = boost::python::extract<boost::python::numeric::array > (obj);
+      ::ndarray array = boost::python::extract<boost::python::numpy::ndarray > (obj);
       void * voidDataPtr=PyArray_DATA(array.ptr());
       CastPtrType dataPtr = static_cast<CastPtrType>(voidDataPtr);
       size_t dimension =static_cast<size_t>(PyArray_NDIM(array.ptr()));
@@ -50,7 +51,7 @@ public:
    }
 
    
-   NumpyView( boost::python::numeric::array  array):allocFromCpp_(false){
+   NumpyView( boost::python::numpy::ndarray  array):allocFromCpp_(false){
       void * voidDataPtr=PyArray_DATA(array.ptr());
       CastPtrType dataPtr = static_cast<CastPtrType>(voidDataPtr);
       size_t dimension =static_cast<size_t>(PyArray_NDIM(array.ptr()));
@@ -198,7 +199,7 @@ public:
    //   return arrayObj_;
    //};
 private:
-   //boost::python::numeric::array arrayObj_;
+   //boost::python::numpy::ndarray arrayObj_;
    bool allocFromCpp_;
    marray::View< V ,false > view_;
    void * arrayData_;
