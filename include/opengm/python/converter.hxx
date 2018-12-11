@@ -211,7 +211,7 @@ inline boost::python::numpy::ndarray iteratorToNumpy(ITERATOR iter, size_t size)
 
 template<class NUMERIC_ARRAY>
 inline NPY_TYPES getArrayType(NUMERIC_ARRAY arr) {
-   return NPY_TYPES(PyArray_TYPE(arr.ptr()));
+   return NPY_TYPES(PyArray_TYPE(reinterpret_cast<PyArrayObject*>(arr.ptr())));
 }
 
 inline boost::python::numpy::ndarray extractConstNumericArray
