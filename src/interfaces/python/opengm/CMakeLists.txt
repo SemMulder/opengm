@@ -12,7 +12,7 @@ endif()
 # Find packages
 #--------------------------------------------------------------
 if ( WITH_BOOST )
-   find_package(Boost COMPONENTS python numpy REQUIRED)
+   find_package(Boost COMPONENTS python37 numpy37 REQUIRED)
 else()
    message( FATAL_ERROR "Option  WITH_BOOST  needs to be activated to compile the OpenGM Python Wrapper" )
 endif()
