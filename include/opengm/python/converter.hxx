@@ -121,32 +121,32 @@ inline boost::python::numpy::ndarray objToArray(boost::python::object obj){
 
 
 
-inline std::string printEnum(PyArray_TYPES value) {
-   if (value == PyArray_UBYTE) return std::string("PyArray_UBYTE");
-   else if (value == PyArray_BOOL) return std::string("PyArray_BOOL");
-   else if (value == PyArray_UINT8) return std::string("PyArray_UINT8");
-   else if (value == PyArray_UINT16) return std::string("PyArray_UINT16");
-   else if (value == PyArray_UINT32) return std::string("PyArray_UINT32");
-   else if (value == PyArray_UINT64) return std::string("PyArray_UINT64");
-   else if (value == PyArray_INT8) return std::string("PyArray_INT8");
-   else if (value == PyArray_INT16) return std::string("PyArray_INT16");
-   else if (value == PyArray_INT32) return std::string("PyArray_INT32");
-   else if (value == PyArray_INT64) return std::string("PyArray_INT64");
-   else if (value == PyArray_FLOAT32) return std::string("PyArray_FLOAT32");
-   else if (value == PyArray_FLOAT64) return std::string("PyArray_FLOAT64");
-   else if (value == PyArray_BYTE) return std::string("PyArray_BYTE");
-   else if (value == PyArray_UBYTE) return std::string("PyArray_UBYTE");
-   else if (value == PyArray_USHORT) return std::string("PyArray_USHORT");
-   else if (value == PyArray_INT) return std::string("PyArray_INT");
-   else if (value == PyArray_UINT) return std::string("PyArray_UINT");
-   else if (value == PyArray_LONG) return std::string("PyArray_LONG");
-   else if (value == PyArray_ULONG) return std::string("PyArray_ULONG");
-   else if (value == PyArray_LONGLONG) return std::string("PyArray_LONGLONG");
-   else if (value == PyArray_DOUBLE) return std::string("PyArray_DOUBLE");
-   else if (value == PyArray_LONGDOUBLE) return std::string("PyArray_LONGDOUBLE");
-   else if (value == PyArray_FLOAT) return std::string("PyArray_FLOAT");
-   else if (value == PyArray_CFLOAT) return std::string("PyArray_CFLOAT");
-   else if (value == PyArray_CDOUBLE) return std::string("PyArray_CDOUBLE");
+inline std::string printEnum(NPY_TYPES value) {
+   if (value == NPY_UBYTE) return std::string("PyArray_UBYTE");
+   else if (value == NPY_BOOL) return std::string("NPY_BOOL");
+   else if (value == NPY_UINT8) return std::string("NPY_UINT8");
+   else if (value == NPY_UINT16) return std::string("NPY_UINT16");
+   else if (value == NPY_UINT32) return std::string("NPY_UINT32");
+   else if (value == NPY_UINT64) return std::string("NPY_UINT64");
+   else if (value == NPY_INT8) return std::string("NPY_INT8");
+   else if (value == NPY_INT16) return std::string("NPY_INT16");
+   else if (value == NPY_INT32) return std::string("NPY_INT32");
+   else if (value == NPY_INT64) return std::string("NPY_INT64");
+   else if (value == NPY_FLOAT32) return std::string("NPY_FLOAT32");
+   else if (value == NPY_FLOAT64) return std::string("NPY_FLOAT64");
+   else if (value == NPY_BYTE) return std::string("NPY_BYTE");
+   else if (value == NPY_UBYTE) return std::string("NPY_UBYTE");
+   else if (value == NPY_USHORT) return std::string("NPY_USHORT");
+   else if (value == NPY_INT) return std::string("NPY_INT");
+   else if (value == NPY_UINT) return std::string("NPY_UINT");
+   else if (value == NPY_LONG) return std::string("NPY_LONG");
+   else if (value == NPY_ULONG) return std::string("NPY_ULONG");
+   else if (value == NPY_LONGLONG) return std::string("NPY_LONGLONG");
+   else if (value == NPY_DOUBLE) return std::string("NPY_DOUBLE");
+   else if (value == NPY_LONGDOUBLE) return std::string("NPY_LONGDOUBLE");
+   else if (value == NPY_FLOAT) return std::string("NPY_FLOAT");
+   else if (value == NPY_CFLOAT) return std::string("NPY_CFLOAT");
+   else if (value == NPY_CDOUBLE) return std::string("NPY_CDOUBLE");
 
    else return " unkown type";
 }
@@ -206,8 +206,8 @@ inline boost::python::numpy::ndarray iteratorToNumpy(ITERATOR iter, size_t size)
 }
 
 template<class NUMERIC_ARRAY>
-inline PyArray_TYPES getArrayType(NUMERIC_ARRAY arr) {
-   return PyArray_TYPES(PyArray_TYPE(arr.ptr()));
+inline NPY_TYPES getArrayType(NUMERIC_ARRAY arr) {
+   return NPY_TYPES(PyArray_TYPE(arr.ptr()));
 }
 
 inline boost::python::numpy::ndarray extractConstNumericArray
@@ -242,9 +242,9 @@ struct NumpyViewType_from_python_numpyarray {
          return 0;
       } else {
          numpy::ndarray numpyArray = extractConstNumericArray(obj_ptr);
-         PyArray_TYPES pyArrayType = getArrayType(numpyArray);
+         NPY_TYPES pyArrayType = getArrayType(numpyArray);
          // check if the type of the numpy array matches the c++ type  
-         PyArray_TYPES myEnum = typeEnumFromType<ValueType > ();
+         NPY_TYPES myEnum = typeEnumFromType<ValueType > ();
          if (myEnum != pyArrayType) {
             std::stringstream ss;
             ss << "type mismatch:\n";
