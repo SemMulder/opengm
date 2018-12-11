@@ -144,7 +144,7 @@ namespace pymanipulator {
 template<class GM>
 void export_gm_manipulator() {
   
-   import_array();
+   _import_array();
 
    
 

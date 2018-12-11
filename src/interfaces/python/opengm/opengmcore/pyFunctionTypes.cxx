@@ -461,7 +461,7 @@ namespace pyfuncvec{
 
 template<class V,class I>
 void export_functiontypes(){
-   import_array();
+   _import_array();
    typedef V ValueType;
    typedef I IndexType;
    typedef IndexType LabelType;

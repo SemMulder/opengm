@@ -10,7 +10,7 @@
 template<class GM,class ACC>
 void export_trbp(){
    using namespace boost::python;
-   import_array();
+   _import_array();
    append_subnamespace("solver");
 
    // setup 

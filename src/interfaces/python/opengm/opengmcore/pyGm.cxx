@@ -1443,7 +1443,7 @@ namespace pygm {
 template<class GM>
 void export_gm() {
 
-   import_array();
+   _import_array();
 
    typedef GM PyGm;
    typedef typename PyGm::SpaceType PySpace;

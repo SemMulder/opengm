@@ -119,7 +119,7 @@ BOOST_PYTHON_MODULE_INIT(_inference) {
    scope current;
    std::string currentScopeName(extract<const char*>(current.attr("__name__")));
    currentScopeName="inference";
-   //import_array();
+   //_import_array();
    export_inference();
    //adder
    {

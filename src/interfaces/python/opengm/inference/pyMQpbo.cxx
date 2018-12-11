@@ -17,7 +17,7 @@ using namespace boost::python;
 template<class GM,class ACC>
 void export_mqpbo(){
    using namespace boost::python;
-   import_array();
+   _import_array();
    append_subnamespace("solver");
 
    // setup 

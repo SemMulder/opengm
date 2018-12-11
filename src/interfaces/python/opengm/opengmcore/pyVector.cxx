@@ -212,7 +212,7 @@ namespace pyvector{
 
 template<class INDEX>
 void export_vectors() {
-   import_array();
+   _import_array();
    typedef std::vector<INDEX> IndexTypeStdVector;
    typedef std::vector< IndexTypeStdVector> IndexTypeStdVectorVector;
 

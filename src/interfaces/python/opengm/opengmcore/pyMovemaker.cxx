@@ -137,7 +137,7 @@ void export_movemaker() {
    using namespace boost::python;
    boost::python::docstring_options docstringOptions(true,true,false);
    
-   import_array();
+   _import_array();
    typedef GM PyGm;
    typedef typename PyGm::SpaceType PySpace;
    typedef typename PyGm::ValueType ValueType;

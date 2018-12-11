@@ -15,7 +15,7 @@ using namespace boost::python;
 template<class GM,class ACC>
 void export_ae_fusion(){
 
-   import_array(); 
+   _import_array();
    typedef GM PyGm;
    typedef typename PyGm::ValueType ValueType;
    typedef typename PyGm::IndexType IndexType;

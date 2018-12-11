@@ -29,7 +29,7 @@ void export_libdai_inference(){
 
 
 	using namespace boost::python;
-   import_array();
+   _import_array();
    append_subnamespace("solver");
    
    // INFERENCE TYPEDEFS
