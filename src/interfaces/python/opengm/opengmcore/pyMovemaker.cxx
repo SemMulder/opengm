@@ -135,7 +135,6 @@ namespace pymovemaker{
 template<class GM>
 void export_movemaker() {
    using namespace boost::python;
-   boost::python::numpy::ndarray::set_module_and_type("numpy", "ndarray");
    boost::python::docstring_options docstringOptions(true,true,false);
    
    import_array();

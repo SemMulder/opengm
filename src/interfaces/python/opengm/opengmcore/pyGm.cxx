@@ -1443,7 +1443,6 @@ namespace pygm {
 template<class GM>
 void export_gm() {
 
-   boost::python::numpy::ndarray::set_module_and_type("numpy", "ndarray");
    import_array();
 
    typedef GM PyGm;

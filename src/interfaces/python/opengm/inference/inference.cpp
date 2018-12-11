@@ -107,8 +107,7 @@ BOOST_PYTHON_MODULE_INIT(_inference) {
 
    Py_Initialize();
    PyEval_InitThreads();
-   boost::python::numpy::ndarray::set_module_and_type("numpy", "ndarray");
-   
+
    std::string adderString="adder";
    std::string multiplierString="multiplier";
    std::string minimizerString="minimizer";

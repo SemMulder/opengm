@@ -462,7 +462,6 @@ namespace pyfuncvec{
 template<class V,class I>
 void export_functiontypes(){
    import_array();
-   boost::python::numpy::ndarray::set_module_and_type("numpy", "ndarray");
    typedef V ValueType;
    typedef I IndexType;
    typedef IndexType LabelType;
