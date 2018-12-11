@@ -7,7 +7,7 @@
 #include <numpy/noprefix.h>
 #ifdef Bool
 #undef Bool
-#endif 
+#endif
 #include <stddef.h>
 #include <opengm/graphicalmodel/graphicalmodel.hxx>
 
@@ -16,7 +16,7 @@
 
 namespace opengm{
 namespace python{
-   
+
 using namespace boost::python;
 
 //template<class T, size_t DIM>
@@ -31,18 +31,21 @@ public:
    typedef typename marray::View< V ,false >::iterator IteratorType;
    typedef typename marray::View< V ,false >::const_iterator ConstIteratorType;
    typedef size_t const *  ShapeIteratorType;
-   
+
    NumpyView():allocFromCpp_(false){
 
    }
    NumpyView( boost::python::object  obj):allocFromCpp_(false){
-      ::ndarray array = boost::python::extract<boost::python::numpy::ndarray > (obj);
-      void * voidDataPtr=PyArray_DATA(array.ptr());
-      CastPtrType dataPtr = static_cast<CastPtrType>(voidDataPtr);
-      size_t dimension =static_cast<size_t>(PyArray_NDIM(array.ptr()));
+      numpy::ndarray array = boost::python::extract<boost::python::numpy::ndarray > (obj);
 
-      npy_intp * shapePtr = PyArray_DIMS(array.ptr());
-      npy_intp * stridePtr = PyArray_STRIDES(array.ptr());
+      PyArrayObject* array_ptr = reinterpret_cast<PyArrayObject*>(array.ptr());
+
+      void * voidDataPtr=PyArray_DATA(array_ptr);
+      CastPtrType dataPtr = static_cast<CastPtrType>(voidDataPtr);
+      size_t dimension =static_cast<size_t>(PyArray_NDIM(array_ptr));
+
+      npy_intp * shapePtr = PyArray_DIMS(array_ptr);
+      npy_intp * stridePtr = PyArray_STRIDES(array_ptr);
       opengm::FastSequence<size_t> mystrides(dimension);
       for(size_t i=0;i<dimension;++i){
          mystrides[i]=(stridePtr[i])/sizeof(V);
@@ -50,13 +53,14 @@ public:
       view_.assign(shapePtr,shapePtr+dimension,mystrides.begin(),dataPtr,marray::FirstMajorOrder);
    }
 
-   
+
    NumpyView( boost::python::numpy::ndarray  array):allocFromCpp_(false){
-      void * voidDataPtr=PyArray_DATA(array.ptr());
+      PyArrayObject* array_ptr = reinterpret_cast<PyArrayObject*>(array.ptr());
+      void * voidDataPtr=PyArray_DATA(array_ptr);
       CastPtrType dataPtr = static_cast<CastPtrType>(voidDataPtr);
-      size_t dimension =static_cast<size_t>(PyArray_NDIM(array.ptr()));
-      npy_intp * shapePtr = PyArray_DIMS(array.ptr());
-      npy_intp * stridePtr = PyArray_STRIDES(array.ptr());
+      size_t dimension =static_cast<size_t>(PyArray_NDIM(array_ptr));
+      npy_intp * shapePtr = PyArray_DIMS(array_ptr);
+      npy_intp * stridePtr = PyArray_STRIDES(array_ptr);
       opengm::FastSequence<size_t> mystrides(dimension);
       for(size_t i=0;i<dimension;++i){
          mystrides[i]=(stridePtr[i])/sizeof(V);
@@ -73,7 +77,7 @@ public:
    void error(const std::string &reason=std::string(" "))const{throw opengm::RuntimeError(reason);}
    //ShapeIteratorType shapeBegin()const{return view_.shapeBegin();}
    //ShapeIteratorType shapeEnd()const{return view_.shapeBegin();}
-   
+
    template<class X0>
    const ValueType & operator()(X0 x0)const{
       return view_(x0);
@@ -111,7 +115,7 @@ public:
    const ValueType & operator[](ITERATOR  iterator)const{
       return view_(iterator);
    }
-   
+
    template<class X0>
    ValueType & operator()(X0 x0){
       return view_(x0);
@@ -150,30 +154,30 @@ public:
       return view_(iterator);
    }
 
-   ConstIteratorType begin1d()const{ 
+   ConstIteratorType begin1d()const{
       return view_.begin();
    }
-   ConstIteratorType end1d()const{ 
+   ConstIteratorType end1d()const{
       return view_.end();
    }
-   IteratorType begin1d(){ 
+   IteratorType begin1d(){
       return view_.begin();
    }
-   IteratorType end1d(){ 
-      return view_.end();   
+   IteratorType end1d(){
+      return view_.end();
    }
 
-   ConstIteratorType begin()const{ 
+   ConstIteratorType begin()const{
       return view_.begin();
    }
-   ConstIteratorType end()const{ 
+   ConstIteratorType end()const{
       return view_.end();
    }
-   IteratorType begin(){ 
+   IteratorType begin(){
       return view_.begin();
    }
-   IteratorType end(){ 
-      return view_.end();   
+   IteratorType end(){
+      return view_.end();
    }
 
    marray::View< V, false > getSliceView(size_t dimension, size_t sliceIndex) {
