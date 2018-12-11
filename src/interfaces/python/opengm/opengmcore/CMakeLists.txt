@@ -79,7 +79,7 @@ endif()
 
 if(LINK_RT)
     find_library(RT rt)
-    target_link_libraries(_opengmcore ${Boost_LIBRARIES} rt)
+    target_link_libraries(_opengmcore ${PYTHON_LIBRARY} ${Boost_LIBRARIES} rt)
 else()
     target_link_libraries(_opengmcore ${PYTHON_LIBRARY} ${Boost_LIBRARIES})
 endif(LINK_RT)
